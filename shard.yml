@@ -1,0 +1,17 @@
+name: ghnews
+version: 0.0.1
+
+authors:
+  - Javi Fontan <jfontan@gmail.com>
+
+targets:
+  ghnews:
+    main: src/ghnews.cr
+
+dependencies:
+  halite:
+    github: icyleaf/halite
+
+crystal: 0.25.1
+
+license: MIT
