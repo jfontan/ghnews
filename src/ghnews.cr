@@ -10,7 +10,9 @@ token = ENV["GITHUB_TOKEN"]?
 
 panic("no GITHUB_TOKEN set") if !token
 
-g = GitHub::Client.new(token)
-n = g.notifications(Time.new(2018, 7, 5))
+file = "notifications.json"
 
-pp n
+notifications = Ghnews::Notifications.load(file)
+notifications.download(token)
+notifications.save(file)
+

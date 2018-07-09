@@ -70,7 +70,7 @@ module GitHub
     end
 
     def notifications(
-      time : Time = nil,
+      time : (Time|Nil) = nil,
       params : (Hash(String, _) | Nil) = nil
     ) : Notifications
       notifications = Notifications.new
