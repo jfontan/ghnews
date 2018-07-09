@@ -6,10 +6,12 @@ module Ghnews
 
   struct Grade
     property id, value, notification
+
     def initialize(
       @id : String,
       @notification : GitHub::Notification,
-      @value : Int32)
+      @value : Int32
+    )
     end
   end
 
@@ -18,7 +20,6 @@ module Ghnews
     end
 
     def grade(data : GitHub::Notification) : Int32
-      puts @func.call(data)
       return @func.call(data) ? @value : 0
     end
   end

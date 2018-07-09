@@ -11,27 +11,29 @@ maintainer = [
 ]
 
 rule_set = [
+  # Test
   Rule.new(RuleFunc.new { true }, 1),
+  # Unread
   Rule.new(RuleFunc.new { |n|
     n.unread
   }, 5),
+  # Older than 2 days
   Rule.new(RuleFunc.new { |n|
     t = Time.now - n.updated_at
     t.days > 2
   }, 5),
+  # Older than 10 days
   Rule.new(RuleFunc.new { |n|
     t = Time.now - n.updated_at
     t.days > 10
   }, 10),
+  # Is a pull request
   Rule.new(RuleFunc.new { |n|
     n.subject.type == "PullRequest"
   }, 5),
+  # In the maintainer's list
   Rule.new(RuleFunc.new { |n|
-    res = maintainer.includes?(n.repository.full_name)
-
-    puts n.repository.full_name if res
-
-    res
+    maintainer.includes?(n.repository.full_name)
   }, 20),
 ]
 
