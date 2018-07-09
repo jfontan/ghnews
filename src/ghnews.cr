@@ -55,7 +55,7 @@ notifications.save(file)
 r = Rules.new(rule_set)
 o = r.grade(notifications.notifications)
 
-o.each do |g|
+o.reverse.each do |g|
   n = g.notification
   puts "#{g.value} - #{n.repository.full_name} - #{n.subject.title}"
 end
