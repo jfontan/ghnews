@@ -41,7 +41,7 @@ module Ghnews
 
     def download(token : String)
       g = GitHub::Client.new(token)
-      n = g.notifications(@last)
+      n = g.notifications(@last, {"all" => true})
       update(n)
     end
 
