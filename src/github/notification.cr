@@ -69,7 +69,10 @@ module GitHub
       client.get(url, params: params)
     end
 
-    def notifications(params : (Hash(String, _) | Nil) = nil) : Notifications
+    def notifications(
+      time : Time = nil,
+      params : (Hash(String, _) | Nil) = nil
+    ) : Notifications
       notifications = Notifications.new
       json = Array(String).new
       page = 1
@@ -83,14 +86,23 @@ module GitHub
                 "(#{response.status_code}) #{response.status_message}"
         end
 
-        n = Array(Notification).from_json(response.body)
-        break if n.size == 0
+        data = Array(Notification).from_json(response.body)
+        return notifications if data.size == 0
 
-        notifications += n
+        if time
+          data.each do |n|
+            if n.updated_at < time
+              return notifications
+            else
+              notifications << n
+            end
+          end
+        else
+          notifications += data
+        end
+
         page += 1
       end
-
-      notifications
     end
   end
 end

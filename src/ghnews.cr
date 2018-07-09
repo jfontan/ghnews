@@ -11,6 +11,6 @@ token = ENV["GITHUB_TOKEN"]?
 panic("no GITHUB_TOKEN set") if !token
 
 g = GitHub::Client.new(token)
-n = g.notifications
+n = g.notifications(Time.new(2018, 7, 5))
 
 pp n
