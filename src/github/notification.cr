@@ -8,8 +8,8 @@ module GitHub
       unread:           Bool,
       reason:           String,
       updated_at:       {type: Time, converter: Time::Format.new("%FT%TZ")},
-      subject:          Subject?,
-      repository:       Repository?,
+      subject:          Subject,
+      repository:       Repository,
       url:              String,
       subscription_url: String,
       last_read_at:     {
@@ -70,7 +70,7 @@ module GitHub
     end
 
     def notifications(
-      time : (Time|Nil) = nil,
+      time : (Time | Nil) = nil,
       params : (Hash(String, _) | Nil) = nil
     ) : Notifications
       notifications = Notifications.new
